@@ -21,5 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('books')->group(function () {
     Route::get("/",[BookController::class,"index"])->name("books.index");
+    Route::post("/",[BookController::class,"store"])->name("books.store");
     Route::get("/{id}/delete",[BookController::class,"destroy"])->name("books.destroy");
 });

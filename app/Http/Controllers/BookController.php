@@ -36,7 +36,9 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->only('title','code','author');
+        $book = Book::create($data);
+        return response()->json(['data'=>$book,'success'=>true]);
     }
 
     /**

@@ -46,4 +46,51 @@ $(document).ready(function () {
             })
         }
     })
+
+    //Click vào nút Create Book sẽ hiện bảng modal
+    $('body').on('click','#add-book',function(){
+        $('.modal').show();
+    });
+
+    //Click vào nút Close sẽ ẩn bảng modal
+    $('body').on('click','#close',function(){
+        $('.modal').hide();
+    });
+
+    //Tạo Create book
+    $('body').on('click','.add-book',function(){
+        let title = $('#book-title').val();
+        let code = $('#book-code').val();
+        let author = $('#book-author').val();
+        $('.add-book').attr('disabled', true);
+
+        $.ajax({
+            url:baseUrl + '/api/books/',
+            method: "POST",
+            type: 'json',
+            data:{
+                title: title,
+                code: code,
+                author: author
+            },
+            success: function (res) {
+                console.log(res.data);
+                $('.add-book').attr('disabled', false);
+                $('.form-add').trigger('reset'); //add xong sau đó sẽ rest dữ liệu và ẩn đi
+                $('.modal').hide();
+                addBook(res.data);
+            }
+        });
+    });
+
+    function addBook(book) {
+        str = `<tr id="book-${book.id}">
+                            <td>${book.id}</td>
+                            <td>${book.title}</td>
+                            <td>${book.code}</td>
+                            <td>${book.author}</td>
+                            <td><button class="btn btn-danger delete-book" data-id="${book.id}">Delete</button></td>
+                    </tr>`;
+        $('.book-list').prepend(str); //add lên đầu trang
+    }
 });
