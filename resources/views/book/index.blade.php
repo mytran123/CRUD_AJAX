@@ -12,6 +12,7 @@
 
     <div class="container">
         <button id="add-book" class="btn btn-success mt-3 mb-3" >Create Book</button>
+        <button id="" class="btn btn-danger mt-3 mb-3 logout" >Logout</button>
         <div class="card">
             <div class="card-header">
                 Book Manager

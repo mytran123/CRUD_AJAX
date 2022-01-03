@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 
 class AuthController extends Controller
 {
@@ -15,5 +17,12 @@ class AuthController extends Controller
         } else {
             dd('Login Fail');
         }
+    }
+
+    public function logout()
+    {
+        Session::flush();
+        Auth::logout();
+        return response()->json(['success'=>true]);
     }
 }

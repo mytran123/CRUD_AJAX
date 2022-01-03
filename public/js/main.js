@@ -146,5 +146,16 @@ $(document).ready(function () {
         });
     });
 
-
+    //logout
+    $('body').on('click','.logout',function () {
+        // alert(2)
+        $.ajax({
+            url: baseUrl + '/api/logout', //goi den duong dan api
+            method: "GET",
+            dataType: "json",
+            success: function (res) { //chuyen trang
+                window.location = baseUrl
+            }
+        })
+    });
 });
