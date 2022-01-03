@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/books', function () {
     return view('book.index');
+});
+
+Route::get('/', function () {
+    return view('auth.login');
 });
