@@ -47,9 +47,10 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show($id)
     {
-        //
+        $book = Book::findOrFail($id);
+        return response()->json(["data" => $book]);
     }
 
     /**
@@ -70,9 +71,12 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request,$id)
     {
-        //
+        $data = $request->only('title','code','author');
+        $book = Book::findOrFail($id);
+        $book->update($data);
+        return response()->json(['data'=>$book,'success' => true]);
     }
 
     /**

@@ -35,23 +35,24 @@
         </div>
     </div>
 
-    <div class="modal" tabindex="-1">
+    <div class="modal modal-add" tabindex="1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Create Book</h5>
                     <button type="button" class="btn-close" id="close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+
                 <div class="modal-body">
 {{--                    <p>Modal body text goes here.</p>--}}
                     <form class="form-add">
                         <div class="mb-3">
                             <label for="book-title" class="form-label">Title</label>
-                            <input type="text" placeholder="Enter Title" class="form-control" id="book-title" aria-describedby="emailHelp">
+                            <input type="text" placeholder="Enter Title" class="form-control" id="book-title">
                         </div>
                         <div class="mb-3">
                             <label for="book-code" class="form-label">Code</label>
-                            <input type="number" placeholder="Enter Code" class="form-control" id="book-code" aria-describedby="emailHelp">
+                            <input type="number" placeholder="Enter Code" class="form-control" id="book-code">
                         </div>
                         <div class="mb-3">
                             <label for="book-author" class="form-label">Author</label>
@@ -60,9 +61,51 @@
 {{--                        <button type="submit" class="btn btn-primary">Submit</button>--}}
                     </form>
                 </div>
+
+
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="close" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary add-book">ADD</button>
+                    <button type="button" class="btn btn-primary ">UPDATE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-update" tabindex="2">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Book</h5>
+                    <button type="button" class="btn-close" id="close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    {{--                    <p>Modal body text goes here.</p>--}}
+                    <form class="form-add">
+                        <div class="mb-3">
+                            <label for="book-id" class="form-label">ID</label>
+                            <input type="text" class="form-control book-id" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="book-title" class="form-label">Title</label>
+                            <input type="text" class="form-control book-title">
+                        </div>
+                        <div class="mb-3">
+                            <label for="book-code" class="form-label">Code</label>
+                            <input type="number" class="form-control book-code">
+                        </div>
+                        <div class="mb-3">
+                            <label for="book-author" class="form-label">Author</label>
+                            <input type="text" class="form-control book-author">
+                        </div>
+                        {{--                        <button type="submit" class="btn btn-primary">Submit</button>--}}
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="close" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary update-book">UPDATE</button>
                 </div>
             </div>
         </div>

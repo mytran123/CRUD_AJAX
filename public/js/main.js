@@ -24,6 +24,7 @@ $(document).ready(function () {
                             <td>${books[i].title}</td>
                             <td>${books[i].code}</td>
                             <td>${books[i].author}</td>
+                            <td><button class="btn btn-warning edit-book" data-id="${books[i].id}">Update</button></td>
                             <td><button class="btn btn-danger delete-book" data-id="${books[i].id}">Delete</button></td>
                     </tr>`;
         }
@@ -49,13 +50,17 @@ $(document).ready(function () {
 
     //Click vào nút Create Book sẽ hiện bảng modal
     $('body').on('click','#add-book',function(){
-        $('.modal').show();
+        $('.modal-add').show();
+        $('.form-add').trigger('reset'); //add xong sau đó sẽ rest dữ liệu và ẩn đi
     });
 
     //Click vào nút Close sẽ ẩn bảng modal
     $('body').on('click','#close',function(){
         $('.modal').hide();
     });
+
+    //Click vào nút Update sẽ hiện lên
+
 
     //Tạo Create book
     $('body').on('click','.add-book',function(){
@@ -76,7 +81,7 @@ $(document).ready(function () {
             success: function (res) {
                 console.log(res.data);
                 $('.add-book').attr('disabled', false);
-                $('.form-add').trigger('reset'); //add xong sau đó sẽ rest dữ liệu và ẩn đi
+                // $('.form-add').trigger('reset'); //add xong sau đó sẽ rest dữ liệu và ẩn đi
                 $('.modal').hide();
                 addBook(res.data);
             }
@@ -89,8 +94,57 @@ $(document).ready(function () {
                             <td>${book.title}</td>
                             <td>${book.code}</td>
                             <td>${book.author}</td>
+                            <td><button class="btn btn-warning edit-book" data-id="${book.id}">Update</button></td>
                             <td><button class="btn btn-danger delete-book" data-id="${book.id}">Delete</button></td>
                     </tr>`;
         $('.book-list').prepend(str); //add lên đầu trang
     }
+
+
+    //Edit book
+    $('body').on('click','.edit-book',function(){
+       $(".modal-update").show();
+        // let idUser = $('.delete-user').attr('data-id');
+        let idBook = $('.edit-book').attr('data-id')
+
+        $.ajax({
+            url:baseUrl + '/api/books/' + idBook,
+            method: "GET",
+            type: 'json',
+            success: function (res) {
+                console.log(res.data);
+                $('.book-id').val(res.data.id);
+                $('.book-title').val(res.data.title);
+                $('.book-code').val(res.data.code);
+                $('.book-author').val(res.data.author);
+            }
+        });
+    });
+
+    //Update
+    $('body').on('click','.update-book',function(){
+        let idBook = $('.book-id').val();
+
+        $.ajax({
+            url:baseUrl + '/api/books/' + idBook,
+            method: "POST",
+            dataType: 'json',
+            data: {
+                id: idBook,
+                title: $('.book-title').val(),
+                code: $('.book-code').val(),
+                author: $('.book-author').val(),
+            },
+            success: function (res) {
+                console.log(res);
+                $('.modal').hide();
+                $(`#book-${idBook} td:nth-child(1)`).html(res.data.id);
+                $(`#book-${idBook} td:nth-child(2)`).html(res.data.title);
+                $(`#book-${idBook} td:nth-child(3)`).html(res.data.code);
+                $(`#book-${idBook} td:nth-child(4)`).html(res.data.author);
+            }
+        });
+    });
+
+
 });
